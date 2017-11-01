@@ -1,0 +1,72 @@
+import FreeCAD as App, FreeCADGui as Gui, Part, sys
+#from PySide import QtCore, QtGui
+import random
+import math
+from math import sin, cos
+
+from PySide import QtCore
+from PySide import QtGui
+
+import FreeCAD
+from FreeCAD import Base
+
+radius = 90
+placement = App.ActiveDocument.getObjectsByLabel("Halbkugel")[0].Placement
+
+def calculate_random(i):
+	phi_angle = random.randint(0,360)
+	phi = math.radians(phi_angle)
+	theta_angle = random.randint(100,180)
+	theta = math.radians(theta_angle)
+	
+	x = radius * sin(theta) * cos(phi)
+	y = radius * sin(theta) * sin(phi)
+	z = radius * cos(theta)
+	
+	placementToSet = placement.copy()
+	# Verschiebe Objekt nur zu 99% entlang Achse, so dass Objekt und Kugel sich auch wirklich schneiden
+	placementToSet.Base = (Base.Vector(x,y,z)*0.99)
+	placementToSet.Rotation = Base.Rotation(Base.Vector(0,0,1), Base.Vector(x,y,z))	
+	i.Object.Placement = placementToSet
+	
+	for j in Gui.Selection.getSelectionEx():	
+		try:
+			FreeCAD.Console.PrintMessage('\n----\n')
+			label_i = i.Object.Label						
+			FreeCAD.Console.PrintMessage(label_i)
+			FreeCAD.Console.PrintMessage('|')			
+			label_j = j.Object.Label
+			FreeCAD.Console.PrintMessage(label_j)			
+			FreeCAD.Console.PrintMessage('\n')			
+			if label_i == label_j :
+				FreeCAD.Console.PrintMessage('Same object !\n')
+			else:			
+				Cvol = i.Object.Shape.common(j.Object.Shape)
+				FreeCAD.Console.PrintMessage(str(Cvol.Volume))	
+				FreeCAD.Console.PrintMessage('\n')				
+				if Cvol.Volume > 1e-6 :
+					FreeCAD.Console.PrintMessage('COLLISION Detected !\n')
+					calculate_random(i)
+				else:
+					FreeCAD.Console.PrintMessage('NO COLLISION Detected !\n')
+		
+		except:
+			msg = 'error on collision check'
+			raise(Exception(msg))
+
+class ObjectsSphereDistributor(object):
+	def __init__(self):
+		try:
+			FreeCAD.Console.PrintMessage('\nSTART\n')
+			# Hier mussen alle zu verschiebenden Objekte selektiert sein
+			Gui.Selection.getSelectionEx()[0]			
+			for i in Gui.Selection.getSelectionEx():		
+				calculate_random(i)
+			
+			FreeCAD.Console.PrintMessage('\nEND\n')
+		except:
+			msg = 'error on objects distribution'
+			FreeCAD.Console.PrintError(msg + '\n')			
+			raise(Exception(msg))
+
+OSD = ObjectsSphereDistributor()
