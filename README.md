@@ -17,10 +17,9 @@ Sources:
 [Example for collision detection](https://github.com/FreeCAD/FreeCAD-macros/blob/master/Utility/HighlightCommon.FCMacro)  
 [How to calculate coordinates from sperical coordinates](https://en.wikipedia.org/wiki/Spherical_coordinate_system)  
 
-Result:
-
+Result:  
 ![Picture](ObjectSphereDistributor.png)
 
-On youtube:
+On youtube:  
 [Start on wall](https://www.youtube.com/watch?v=Owqz37V-LQc)  
 [Lamp](https://www.youtube.com/watch?v=VS3f4zUfHAM)  
