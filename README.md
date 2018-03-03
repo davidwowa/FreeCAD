@@ -23,5 +23,5 @@ Result:
 ![Picture](ObjectSphereDistributor.png)
 
 On youtube:  
-[Start on wall](https://www.youtube.com/watch?v=Owqz37V-LQc)  
-[Lamp](https://www.youtube.com/watch?v=VS3f4zUfHAM)  
+[Here a example how run stars in room](https://www.youtube.com/watch?v=Owqz37V-LQc)  
+[My lamp as example](https://www.youtube.com/watch?v=VS3f4zUfHAM)  
