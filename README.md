@@ -9,8 +9,10 @@ Create figures in inkscape, and import as geometry in FreeCAD. With 'ObjectsSPhe
 3. Select all Paths in Combo-View(left)
 4. Click on "Upgrade: Joins objects into a higher-level object"
 5. Go to "Part-Module" and select "Extrude: Extrudes planar faces of an object"
-6. Adjust the high of you object
-7. TODO
+6. Adjust the high of you object, set as example 40mm in Z-Axis
+7. Your sphere must have name "Halbkugel"
+8. Select all object for distribution
+9. Run macro
 
 Sources:  
 [Forum FreeCAD in german](https://forum.freecadweb.org/viewtopic.php?f=13&t=25064)  
